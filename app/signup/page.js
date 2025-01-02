@@ -159,12 +159,12 @@
 
 // export default Signup;
 
+
 "use client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Link from "next/link";
@@ -224,161 +224,127 @@ const Signup = () => {
 
   return (
     <>
-      <Container>
-        <Row className="d-flex justify-content-center align-items-center min-vh-100">
-          <Col xs={12} sm={10} md={8} lg={6} xl={5}>
-            <Card className="shadows border-0 rounded p-4">
-              <Card.Body>
-                <div className="text-center mb-4">
-                  <h2 className="fw-bold text-primary fs-4">Sign up</h2>
+      <div className="min-h-screen flex justify-center items-center bg-gray-100">
+        <div className="w-full max-w-md p-6 bg-white shadow-lg rounded-lg">
+          <h2 className="text-2xl font-semibold text-center text-blue-600 mb-6">Sign Up</h2>
+
+          <Formik
+            initialValues={{
+              name: "",
+              num: "",
+              email: "",
+              password: "",
+              repassword: "",
+              hcode: "",
+            }}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {() => (
+              <Form>
+                <div className="mb-4">
+                  <Field
+                    type="text"
+                    name="name"
+                    placeholder="Enter Your Full Name"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <ErrorMessage name="name" component="div" className="text-red-500 mt-1" />
                 </div>
 
-                <Formik
-                  initialValues={{
-                    name: "",
-                    num: "",
-                    email: "",
-                    password: "",
-                    repassword: "",
-                    hcode: "",
-                  }}
-                  validationSchema={validationSchema}
-                  onSubmit={handleSubmit}
-                >
-                  {() => (
-                    <Form>
-                      <div className="mb-3">
-                        <Field
-                          type="text"
-                          className="form-control shadow-sm"
-                          id="name"
-                          name="name"
-                          placeholder="Enter Your Full Name"
-                        />
-                        <ErrorMessage
-                          name="name"
-                          component="div"
-                          className="text-danger mt-1"
-                        />
-                      </div>
+                <div className="mb-4">
+                  <Field
+                    type="email"
+                    name="email"
+                    placeholder="Enter Your Email"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <ErrorMessage name="email" component="div" className="text-red-500 mt-1" />
+                </div>
 
-                      <div className="mb-3">
-                        <Field
-                          type="email"
-                          className="form-control shadow-sm"
-                          id="email"
-                          name="email"
-                          placeholder="Enter Your Email"
-                        />
-                        <ErrorMessage
-                          name="email"
-                          component="div"
-                          className="text-danger mt-1"
-                        />
-                      </div>
+                <div className="mb-4">
+                  <Field
+                    type="text"
+                    name="num"
+                    placeholder="Enter Your Phone Number"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <ErrorMessage name="num" component="div" className="text-red-500 mt-1" />
+                </div>
 
-                      <div className="mb-3">
-                        <Field
-                          type="text"
-                          className="form-control shadow-sm"
-                          id="num"
-                          name="num"
-                          placeholder="Enter Your Phone Number"
-                        />
-                        <ErrorMessage
-                          name="num"
-                          component="div"
-                          className="text-danger mt-1"
-                        />
-                      </div>
+                <div className="mb-4">
+                  <Field
+                    type="password"
+                    name="password"
+                    placeholder="Enter Your Password"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <ErrorMessage name="password" component="div" className="text-red-500 mt-1" />
+                </div>
 
-                      <div className="mb-3">
-                        <Field
-                          type="password"
-                          className="form-control shadow-sm"
-                          id="password"
-                          name="password"
-                          placeholder="Enter Your Password"
-                        />
-                        <ErrorMessage
-                          name="password"
-                          component="div"
-                          className="text-danger mt-1"
-                        />
-                      </div>
+                <div className="mb-4">
+                  <Field
+                    type="password"
+                    name="repassword"
+                    placeholder="Confirm Your Password"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <ErrorMessage name="repassword" component="div" className="text-red-500 mt-1" />
+                </div>
 
-                      <div className="mb-3">
-                        <Field
-                          type="password"
-                          className="form-control shadow-sm"
-                          id="repassword"
-                          name="repassword"
-                          placeholder="Confirm Your Password"
-                        />
-                        <ErrorMessage
-                          name="repassword"
-                          component="div"
-                          className="text-danger mt-1"
-                        />
-                      </div>
+                <div className="mb-4">
+                  <Field
+                    type="text"
+                    name="hcode"
+                    placeholder="Enter Hospital Code"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <ErrorMessage name="hcode" component="div" className="text-red-500 mt-1" />
+                </div>
 
-                      <div className="mb-3">
-                        <Field
-                          type="text"
-                          className="form-control shadow-sm"
-                          id="hcode"
-                          name="hcode"
-                          placeholder="Enter Hospital Code"
-                        />
-                        <ErrorMessage
-                          name="hcode"
-                          component="div"
-                          className="text-danger mt-1"
-                        />
-                      </div>
+                <div className="mt-6">
+                  <button
+                    type="submit"
+                    className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    Sign Up
+                  </button>
 
-                      <div className="d-grid gap-2 mt-4">
-                        <Button type="submit" className="btn btn-primary fw-bold">
-                          Sign Up
-                        </Button>
-                       <div className="d-flex justify-content-center">
-                       <Button
-                          type="button"
-                          className="btn btn-danger w-50 fw-bold"
-                          onClick={() => deleteData(1)}
-                        >
-                          Delete Account
-                        </Button>
-                       </div>
-                        <Link href="/login" className="text-center fw-bold w-100 my-2">
-                          Already have an account?<span className="text-success">Login</span>
-                        </Link>
-                      </div>
-                    </Form>
-                  )}
-                </Formik>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
+                  <div className="mt-4 flex justify-center">
+                    <button
+                      type="button"
+                      onClick={() => deleteData(1)}
+                      className="w-1/2 py-2 px-4 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    >
+                      Delete Account
+                    </button>
+                  </div>
 
-        <ToastContainer
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
-      </Container>
+                  <div className="mt-4 text-center">
+                    <Link href="/login" className="text-blue-500 font-semibold">
+                      Already have an account? <span className="text-green-500">Login</span>
+                    </Link>
+                  </div>
+                </div>
+              </Form>
+            )}
+          </Formik>
+        </div>
+      </div>
+
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </>
   );
 };
 
 export default Signup;
-
-
-  
